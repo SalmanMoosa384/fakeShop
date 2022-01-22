@@ -1,0 +1,7 @@
+.image img {max-height: 300px !important;
+    width: 200px !important;}
+
+.image{text-align: center; height:300px;     display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
