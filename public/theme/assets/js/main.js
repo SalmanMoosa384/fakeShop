@@ -12,6 +12,12 @@
 			$('.header-sticky').removeClass('sticky');
 		}
 	});
+
+
+	$('body').on('click','.quickview',function(){
+		$('#quickview').modal('show');
+	});
+
 	
 	/*-----------------------------------------
 		Off Canvas Mobile Menu

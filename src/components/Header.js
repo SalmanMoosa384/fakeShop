@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export const Header = (props) => {
+export const Header = () => {
   const styleLogo = {
     fontSize: "27px",
     fontWeight: "600",
     color: "#ff4545",
   };
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products/categories")
+      .then((res) => res.json())
+      .then((result) => setCategories(result));
+  }, []);
 
   return (
     <>
@@ -26,7 +34,7 @@ export const Header = (props) => {
                 <div className="col-xl-8 d-none d-xl-block">
                   <div className="main-menu position-relative">
                     <ul>
-                      {props.categories.map((r, index) => {
+                      {categories.map((r, index) => {
                         return (
                           <li key={index}>
                             <Link to={`/products/${r}`}>
