@@ -121,7 +121,7 @@ export const Products = ({
           })
         )}
       </div>
-      <Quickview productdetail={productdetail} />
+      <Quickview productdetail={productdetail}  cart={cart}/>
     </>
   );
 };

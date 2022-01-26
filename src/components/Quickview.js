@@ -1,5 +1,5 @@
 import React from "react";
-export const Quickview = ({ productdetail }) => {
+export const Quickview = ({ productdetail,cart }) => {
   return (
     <>
       {productdetail.id != null ? (
@@ -56,7 +56,7 @@ export const Quickview = ({ productdetail }) => {
                       <div className="add-to_cart mb-3">
                         <a
                           className="btn btn-outline-dark btn-hover-primary"
-                          href="cart.html"
+                           onClick={() => cart(productdetail)}
                         >
                           Add to cart
                         </a>
