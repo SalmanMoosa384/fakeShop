@@ -1,182 +1,150 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Breadcumbs from "./Breadcumbs";
+import Loader from "./Loader";
 
 export const Compare = ({ product }) => {
-  console.log(product);
+  const [compareProducts, setCompareProducts] = useState(
+    localStorage.getItem("compare") !== null
+      ? JSON.parse(localStorage.getItem("compare"))
+      : []
+  );
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    localStorage.setItem("compare", JSON.stringify(compareProducts));
+    setLoading(false);
+  }, [compareProducts]);
+
+  const productRemoveFromCompare = (product) => {
+    let pro = compareProducts.filter((item) => item != product);
+    setCompareProducts(pro);
+  };
+
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <div className="compare-page-content-wrap">
-              <div className="compare-table table-responsive">
-                <table className="table table-bordered mb-0">
-                  <tbody>
-                    <tr>
-                      <td className="first-column">Product</td>
-                      <td className="product-image-title">
-                        <a href="product-details.html" className="image">
-                          <img
-                            className="img-fluid"
-                            src="assets/images/products/small-product/1.jpg"
-                            alt="Compare Product"
-                          />
-                        </a>
-                        <a href="#" className="category">
-                          Men
-                        </a>
-                        <a href="product-details.html" className="title">
-                          Brother Hoddies in Grey
-                        </a>
-                      </td>
-                      <td className="product-image-title">
-                        <a href="product-details.html" className="image">
-                          <img
-                            className="img-fluid"
-                            src="assets/images/products/small-product/2.jpg"
-                            alt="Compare Product"
-                          />
-                        </a>
-                        <a href="#" className="category">
-                          Basic
-                        </a>
-                        <a href="product-details.html" className="title">
-                          Basic Jogging Shorts
-                        </a>
-                      </td>
-                      <td className="product-image-title">
-                        <a href="product-details.htmll" className="image">
-                          <img
-                            className="img-fluid"
-                            src="assets/images/products/small-product/3.jpg"
-                            alt="Compare Product"
-                          />
-                        </a>
-                        <a href="#" className="category">
-                          Women
-                        </a>
-                        <a href="product-details.html" className="title">
-                          Simple Woven Fashion
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="first-column">Description</td>
-                      <td className="pro-desc">
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Provident nulla, explicabo iste a rerum
-                          pariatur.
-                        </p>
-                      </td>
-                      <td className="pro-desc">
-                        <p>
-                          Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Sit commodi obcaecati cumque consectetur alias
-                          incidunt?
-                        </p>
-                      </td>
-                      <td className="pro-desc">
-                        <p>
-                          Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Eius,facere. Fuga asperiores inventore iste
-                          tempora.
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="first-column">Price</td>
-                      <td className="pro-price">$95</td>
-                      <td className="pro-price">$75</td>
-                      <td className="pro-price">$60</td>
-                    </tr>
-                    <tr>
-                      <td className="first-column">Size</td>
-                      <td className="pro-color">Medium</td>
-                      <td className="pro-color">Small</td>
-                      <td className="pro-color">Large</td>
-                    </tr>
-                    <tr>
-                      <td className="first-column">Stock</td>
-                      <td className="pro-stock">In Stock</td>
-                      <td className="pro-stock">Stock Out</td>
-                      <td className="pro-stock">In Stock</td>
-                    </tr>
-                    <tr>
-                      <td className="first-column">Add to cart</td>
-                      <td>
-                        <a
-                          href="cart.html"
-                          className="btn btn-dark btn-hover-primary rounded-0"
-                        >
-                          Add to Cart
-                        </a>
-                      </td>
-                      <td>
-                        <a
-                          href="cart.html"
-                          className="btn btn-dark btn-hover-primary rounded-0 disabled"
-                        >
-                          Add to Cart
-                        </a>
-                      </td>
-                      <td>
-                        <a
-                          href="cart.html"
-                          className="btn btn-dark btn-hover-primary rounded-0"
-                        >
-                          Add to Cart
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="first-column">Rating</td>
-                      <td className="product-rating">
-                        <span className="ratings mb-0">
-                          <span className="rating-wrap">
-                            <span className="star"></span>
-                          </span>
-                        </span>
-                      </td>
-                      <td className="product-rating">
-                        <span className="ratings mb-0">
-                          <span className="rating-wrap">
-                            <span className="star"></span>
-                          </span>
-                        </span>
-                      </td>
-                      <td className="product-rating">
-                        <span className="ratings mb-0">
-                          <span className="rating-wrap">
-                            <span className="star"></span>
-                          </span>
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="first-column">Remove</td>
-                      <td className="pro-remove">
-                        <button>
-                          <i className="pe-7s-trash"></i>
-                        </button>
-                      </td>
-                      <td className="pro-remove">
-                        <button>
-                          <i className="pe-7s-trash"></i>
-                        </button>
-                      </td>
-                      <td className="pro-remove">
-                        <button>
-                          <i className="pe-7s-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+      <Breadcumbs title="Compare Products" />
+      {loading == true ? (
+        <Loader />
+      ) : (
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-12">
+              <div className="compare-page-content-wrap">
+                <div className="compare-table table-responsive">
+                  <table className="table table-bordered mt-10 mb-10">
+                    <tbody>
+                      {compareProducts.length == 0 ? (
+                        <tr>
+                          <td>Compare Product is Empty</td>
+                        </tr>
+                      ) : (
+                        <>
+                          <tr>
+                            <td className="first-column">Product</td>
+
+                            {compareProducts.map((item) => {
+                              return (
+                                <td
+                                  className="product-image-title"
+                                  key={item.id}
+                                >
+                                  <Link
+                                    to={`/productsDetail/${item.id}`}
+                                    className="image"
+                                  >
+                                    <img
+                                      className="img-fluid"
+                                      src={item.image}
+                                    />
+                                  </Link>
+                                  <Link
+                                    to={`/products/${item.category}`}
+                                    className="category"
+                                  >
+                                    {item.category}
+                                  </Link>
+                                  <Link
+                                    to={`/productsDetail/${item.id}`}
+                                    className="title"
+                                  >
+                                    {item.title}
+                                  </Link>
+                                </td>
+                              );
+                            })}
+                          </tr>
+
+                          <tr>
+                            <td className="first-column">Description</td>
+                            {compareProducts.map((item) => {
+                              return (
+                                <td className="pro-desc" key={item.id}>
+                                  <p>{item.description}</p>
+                                </td>
+                              );
+                            })}
+                          </tr>
+
+                          <tr>
+                            <td className="first-column">Price</td>
+                            {compareProducts.map((item) => {
+                              return (
+                                <td className="pro-price" key={item.id}>
+                                  ${item.price}
+                                </td>
+                              );
+                            })}
+                          </tr>
+
+                          <tr>
+                            <td className="first-column">Rating</td>
+                            {compareProducts.map((item) => {
+                              return (
+                                <td className="product-rating" key={item.id}>
+                                  <span className="ratings mb-0">
+                                    <span className="rating-wrap">
+                                      <span
+                                        className="star"
+                                        style={{
+                                          width: item.rating.rate * 20 + "%",
+                                        }}
+                                      ></span>
+                                    </span>
+                                  </span>
+                                </td>
+                              );
+                            })}
+                          </tr>
+
+                          <tr>
+                            <td className="first-column">Remove</td>
+                            {compareProducts.map((item) => {
+                              return (
+                                <td className="pro-remove" key={item.id}>
+                                  <button
+                                    onClick={() =>
+                                      productRemoveFromCompare(item)
+                                    }
+                                  >
+                                    <i className="pe-7s-trash"></i>
+                                  </button>
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        </>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

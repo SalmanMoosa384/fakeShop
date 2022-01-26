@@ -6,7 +6,17 @@
     justify-content: center !important;
 }
 
-.table-responsive{overflow: visible !important;}
+
+
+.hero-slide-content>* {
+      animation-name: none !important;
+  }
+
+  .cursor-pointer{cursor: pointer !important;}
+
+
+
+.table-responsive{overflow: visible !important; overflow-x:scroll !important;}
 
 .loader_main{
     width: 100%;

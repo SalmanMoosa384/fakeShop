@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export const Header = () => {
+export const Header = ({ cartItems }) => {
   const styleLogo = {
     fontSize: "27px",
     fontWeight: "600",
@@ -25,9 +25,9 @@ export const Header = () => {
               <div className="row align-items-center">
                 <div className="col-xl-2 col-6">
                   <div className="header-logo">
-                    <a href="index.html">
+                    <Link to="/">
                       <p style={styleLogo}>fakeShop</p>
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -49,22 +49,18 @@ export const Header = () => {
 
                 <div className="col-xl-2 col-6">
                   <div className="header-actions">
-                    <a
-                      href="login-register.html"
+                    <Link
+                      to="/compare"
                       className="header-action-btn d-none d-md-block"
                     >
-                      <i className="pe-7s-user"></i>
-                    </a>
+                      <i className="pe-7s-refresh"></i>
+                    </Link>
 
-                    <a
-                      href="wishlist.html"
-                      className="header-action-btn header-action-btn-wishlist d-none d-md-block"
-                    >
-                      <i className="pe-7s-like"></i>
-                    </a>
-                    <a className="header-action-btn header-action-btn-cart">
+                    <a className="header-action-btn header-action-btn-cart cursor-pointer">
                       <i className="pe-7s-shopbag"></i>
-                      <span className="header-action-num">3</span>
+                      <span className="header-action-num">
+                        {cartItems.length}
+                      </span>
                     </a>
 
                     <a className="header-action-btn header-action-btn-menu d-xl-none d-lg-block">

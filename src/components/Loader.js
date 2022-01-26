@@ -5,7 +5,7 @@ export const Loader = ({ position }) => {
     <div className="loader_main" style={{ position: position }}>
       <button className="loader">
         <span className="spinner"></span>
-        <span className="loader__text">loading...</span>
+        <span className="loader__text">Please wait...</span>
       </button>
     </div>
   );

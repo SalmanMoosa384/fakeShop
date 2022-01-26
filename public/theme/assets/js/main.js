@@ -18,6 +18,15 @@
 		$('#quickview').modal('show');
 	});
 
+	$('body').on('click','.header-action-btn-cart',function(){
+		$('.cart-offcanvas-wrapper').addClass('open');
+	});
+
+	$('body').on('click','.cart-offcanvas-wrapper-close',function(){
+		$('.cart-offcanvas-wrapper').removeClass('open');
+	});
+
+	
 	
 	/*-----------------------------------------
 		Off Canvas Mobile Menu

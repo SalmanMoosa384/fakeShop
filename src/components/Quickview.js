@@ -61,14 +61,6 @@ export const Quickview = ({ productdetail }) => {
                           Add to cart
                         </a>
                       </div>
-                      <div className="add-to-wishlist mb-3">
-                        <a
-                          className="btn btn-outline-dark btn-hover-primary"
-                          href="wishlist.html"
-                        >
-                          Add to Wishlist
-                        </a>
-                      </div>
                     </div>
                   </div>
                 </div>
